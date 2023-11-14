@@ -5,5 +5,4 @@ class BenefitInfo(private val benefit: Benefit, private val totalBenefitDiscount
     fun getBenefitDto(): BenefitInfoDto {
         return BenefitInfoDto(benefit.benefitDes, totalBenefitDiscountPrice)
     }
-
 }

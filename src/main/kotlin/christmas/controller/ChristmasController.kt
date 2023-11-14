@@ -9,23 +9,29 @@ class ChristmasController {
 
     private lateinit var orderInfos: OrderInfos
     private var orderDay: Int = 0
+    private lateinit var benefitInfos: BenefitInfos
 
     fun playEventPlanner() {
         startEventPlanner()
         calculateBenefit()
+        eventResult()
+    }
+
+    private fun eventResult() {
+        OutputView.printBenefitTotalPriceMessage()
+        OutputView.printPrice(-benefitInfos.benefitTotalMoney)
     }
 
     private fun calculateBenefit() {
-        val totalMoney = orderInfos.totalMoney
-        OutputView.printTotalOrderInfoMoney(totalMoney)
-        val benefitInfos = BenefitInfos(orderDay, orderInfos)
+        val totalMoney = orderInfos.orderInfosTotalMoney
+        OutputView.printTotalOrderInfoMoney()
+        OutputView.printPrice(totalMoney)
+        benefitInfos = BenefitInfos(orderDay, orderInfos)
         OutputView.printBenefitMessage()
         val benefitInfoDtos = benefitInfos.getBenefitDtos()
         benefitInfoDtos.forEach {
             OutputView.printBenefitInfo(it.benefitDes, it.benefitTotalPrice)
         }
-
-
     }
 
     private fun startEventPlanner() {
@@ -43,6 +49,5 @@ class ChristmasController {
             OutputView.printOrderInfo(it.orderMenu, it.orderCount)
         }
     }
-
 
 }

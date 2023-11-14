@@ -2,7 +2,7 @@ package christmas.model
 
 class OrderInfos(inputOrderInfo: List<List<String>>) {
     private val orderInfos: List<OrderInfo>
-    val totalMoney: Int
+    val orderInfosTotalMoney: Int
         get() {
             return orderInfos.fold(0) { total, orderInfo ->
                 total + orderInfo.getOrderInfoTotalMoney()
