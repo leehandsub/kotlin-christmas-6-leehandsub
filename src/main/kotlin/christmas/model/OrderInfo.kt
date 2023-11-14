@@ -1,8 +1,12 @@
 package christmas.model
 
-class OrderInfo(private val orderMenu: String, private val orderCount: Int) {
-
+class OrderInfo(private val orderMenu: ChristmasMenu, private val orderCount: Int) {
     fun getOrderInfoDto(): OrderInfoDto {
-        return OrderInfoDto(orderMenu, orderCount)
+        return OrderInfoDto(orderMenu.menuName, orderCount)
     }
+
+    fun getOrderInfoTotalMoney(): Int {
+        return orderMenu.price * orderCount
+    }
+
 }
