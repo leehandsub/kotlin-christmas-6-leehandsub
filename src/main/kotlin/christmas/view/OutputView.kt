@@ -9,6 +9,13 @@ object OutputView {
     private const val BENEFIT_INFO_MESSAGE = "%s: -%s원"
     private const val BENEFIT_TOTAL_PRICE_MESSAGE = "\n<총혜택 금액>"
     private const val PRICE_MESSAGE = "%s원"
+    private const val EVENT_MENU_MESSAGE = "\n<증정 메뉴>"
+    private const val NOT = "없음"
+    private const val CHAMPAGNE = "샴페인"
+
+    fun printNot() {
+        println(NOT)
+    }
 
     fun printOrderDay(orderDay: Int) {
         println(ORDER_DAY_MESSAGE.format(orderDay))
@@ -44,6 +51,14 @@ object OutputView {
 
     private fun Int.addCommas(): String {
         return String.format("%,d", this)
+    }
+
+    fun printEventMenuMessage() {
+        println(EVENT_MENU_MESSAGE)
+    }
+
+    fun printChampagne() {
+        println(CHAMPAGNE)
     }
 
 }
