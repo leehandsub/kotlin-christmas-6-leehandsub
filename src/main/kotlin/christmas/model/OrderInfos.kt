@@ -17,8 +17,43 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
         }
     }
 
-    fun getOrderInfo(): List<OrderInfoDto> {
+    fun getOrderDtoInfo(): List<OrderInfoDto> {
         return orderInfos.map { it.getOrderInfoDto() }
+    }
+
+    fun getBenefitInfos(orderDay: Int): List<BenefitInfo> {
+        val benefits = Benefit.getBenefits(orderDay)
+        return benefits.map {
+            BenefitInfo(it, getBenefitInfo(it, orderDay))
+        }
+    }
+
+    private fun getBenefitInfo(benefit: Benefit, orderDay: Int): Int {
+        when (benefit) {
+            Benefit.CHRISTMAS_DAY_DISCOUNTS -> {
+                return 1000 + benefit.benefitPrice * (orderDay - 1)
+            }
+
+            Benefit.GIFT_EVENT -> {
+                return benefit.benefitPrice
+            }
+
+            Benefit.SPECIAL_DISCOUNT -> {
+                return benefit.benefitPrice
+            }
+
+            Benefit.WEEKDAY_DISCOUNT -> {
+                return benefit.benefitPrice * orderInfos.fold(0) { total, orderInfo ->
+                    total + orderInfo.getMenuOrderCount(MenuKind.DESSERT)
+                }
+            }
+
+            Benefit.WEEKEND_DISCOUNT -> {
+                return benefit.benefitPrice * orderInfos.fold(0) { total, orderInfo ->
+                    total + orderInfo.getMenuOrderCount(MenuKind.MAINFOOD)
+                }
+            }
+        }
     }
 
     companion object {

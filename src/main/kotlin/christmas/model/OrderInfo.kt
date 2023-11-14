@@ -9,4 +9,11 @@ class OrderInfo(private val orderMenu: ChristmasMenu, private val orderCount: In
         return orderMenu.price * orderCount
     }
 
+    fun getMenuOrderCount(menuKind: MenuKind): Int {
+        if (menuKind == orderMenu.menuKind) {
+            return orderCount
+        }
+        return 0
+    }
+
 }
