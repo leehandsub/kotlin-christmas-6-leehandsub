@@ -23,6 +23,7 @@ class ChristmasController {
         OutputView.printPrice(-benefitInfos.benefitTotalMoney)
         val eventResult = EventResult(orderInfos, benefitInfos)
         OutputView.printTotalMoneyAfterDisCount(eventResult.getTotalMoneyAfterDiscount())
+        OutputView.printEventBadge(eventResult.getBadge().badgeName)
     }
 
     private fun calculateBenefit() {

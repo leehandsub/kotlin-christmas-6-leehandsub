@@ -13,6 +13,7 @@ object OutputView {
     private const val NOT = "없음"
     private const val CHAMPAGNE = "샴페인"
     private const val TOTAL_MONEY_AFTER_DISCOUNT = "\n<할인 후 예상 결제 금액>"
+    private const val EVENT_BADGE_MESSAGE = "\n<12월 이벤트 배지>"
 
     fun printNot() {
         println(NOT)
@@ -65,6 +66,11 @@ object OutputView {
     fun printTotalMoneyAfterDisCount(totalMoneyAfterDiscount: Int) {
         println(TOTAL_MONEY_AFTER_DISCOUNT)
         printPrice(totalMoneyAfterDiscount)
+    }
+
+    fun printEventBadge(badgeName: String) {
+        println(EVENT_BADGE_MESSAGE)
+        println(badgeName)
     }
 
 }
