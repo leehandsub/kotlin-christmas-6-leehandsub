@@ -1,6 +1,7 @@
 package christmas.controller
 
 import christmas.model.BenefitInfos
+import christmas.model.EventResult
 import christmas.model.OrderInfos
 import christmas.view.InputView
 import christmas.view.OutputView
@@ -20,6 +21,8 @@ class ChristmasController {
     private fun eventResult() {
         OutputView.printBenefitTotalPriceMessage()
         OutputView.printPrice(-benefitInfos.benefitTotalMoney)
+        val eventResult = EventResult(orderInfos, benefitInfos)
+        OutputView.printTotalMoneyAfterDisCount(eventResult.getTotalMoneyAfterDiscount())
     }
 
     private fun calculateBenefit() {
