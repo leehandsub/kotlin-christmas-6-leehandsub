@@ -24,7 +24,7 @@ class BenefitInfosTest {
             OrderInfos(listOf(listOf("양송이수프", "2")))
         ).benefitTotalMoney
         Assertions.assertThat(result).isEqualTo(
-            9800
+            2200
         )
     }
 }

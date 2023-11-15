@@ -6,11 +6,18 @@ import christmas.view.InputView.errorMessageFormat
 
 class OrderInfos(inputOrderInfo: List<List<String>>) {
     private val orderInfos: List<OrderInfo>
-    private var eventPrice = 0
     val orderInfosTotalMoney: Int
         get() {
             return orderInfos.fold(0) { total, orderInfo ->
                 total + orderInfo.getOrderInfoTotalMoney()
+            }
+        }
+    private val eventPrice: Int
+        get() {
+            return if (orderInfosTotalMoney >= MINIMUM_EVENT_PRICE) {
+                Benefit.GIFT_EVENT.benefitPrice
+            } else {
+                0
             }
         }
 
@@ -28,10 +35,6 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
             errorMessageFormat(ERROR_ORDER_INFO_MESSAGE)
         }
         checkOrderCount(orderInfosCount)
-    }
-
-    fun calEventMenu() {
-        eventPrice = Benefit.GIFT_EVENT.benefitPrice
     }
 
     fun getOrderInfosTotalMoneyAndEventPrice(): Int {

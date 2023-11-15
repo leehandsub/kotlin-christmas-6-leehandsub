@@ -64,7 +64,6 @@ class ChristmasController {
         if (totalMoney < MINIMUM_EVENT_PRICE) {
             OutputView.printNot()
         } else {
-            orderInfos.calEventMenu()
             OutputView.printEventMenus(ChristmasMenu.getEventMenu())
         }
     }
