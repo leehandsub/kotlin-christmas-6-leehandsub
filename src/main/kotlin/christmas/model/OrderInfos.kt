@@ -1,6 +1,7 @@
 package christmas.model
 
 import christmas.view.InputView.checkPositiveInteger
+import christmas.view.InputView.errorMessageFormat
 
 class OrderInfos(inputOrderInfo: List<List<String>>) {
     private val orderInfos: List<OrderInfo>
@@ -12,12 +13,29 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
         }
 
     init {
+        var orderInfosCount = 0
         orderInfos = inputOrderInfo.map {
+            val orderCount = checkPositiveInteger(it[ORDER_COUNT_INDEX], ERROR_ORDER_INFO_MESSAGE)
+            orderInfosCount += orderCount
             OrderInfo(
                 ChristmasMenu.getChristmasMenu(it[ORDER_MENU_INDEX]),
-                checkPositiveInteger(it[ORDER_COUNT_INDEX], ERROR_ORDER_INFO_MESSAGE)
+                orderCount
             )
         }
+        require(isOnlyDrink()) {
+            errorMessageFormat(ERROR_ORDER_INFO_MESSAGE)
+        }
+        checkOrderCount(orderInfosCount)
+    }
+
+    private fun checkOrderCount(orderInfosCount: Int) {
+        require(orderInfosCount <= 20) {
+            errorMessageFormat(ERROR_ORDER_INFO_MESSAGE)
+        }
+    }
+
+    private fun isOnlyDrink(): Boolean {
+        return orderInfos.any { !it.isDrink() }
     }
 
     fun setEventMenuOrderInfos() {

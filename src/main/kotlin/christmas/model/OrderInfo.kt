@@ -9,6 +9,10 @@ class OrderInfo(private val orderMenu: ChristmasMenu, private var orderCount: In
         return orderCount == 0
     }
 
+    fun isDrink(): Boolean {
+        return orderMenu.menuKind == MenuKind.DRINK
+    }
+
     fun increaseEventMenuOrderCount() {
         if (ChristmasMenu.getEventMenu().map { it[0] }.contains(orderMenu.menuName)) {
             orderCount++
