@@ -2,7 +2,7 @@ package christmas.view
 
 object OutputView {
     private const val ORDER_DAY_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"
-    private const val ORDER_MENU_MESSAGE = "<주문 메뉴>"
+    private const val ORDER_MENU_MESSAGE = "\n<주문 메뉴>"
     private const val ORDER_INFO_MESSAGE = "%s %s개"
     private const val TOTAL_ORDER_INFO_MESSAGE = "\n<할인 전 총주문 금액>"
     private const val BENEFIT_MESSAGE = "\n<혜택 내역>"
@@ -11,7 +11,6 @@ object OutputView {
     private const val PRICE_MESSAGE = "%s원"
     private const val EVENT_MENU_MESSAGE = "\n<증정 메뉴>"
     private const val NOT = "없음"
-    private const val CHAMPAGNE = "샴페인"
     private const val TOTAL_MONEY_AFTER_DISCOUNT = "\n<할인 후 예상 결제 금액>"
     private const val EVENT_BADGE_MESSAGE = "\n<12월 이벤트 배지>"
 

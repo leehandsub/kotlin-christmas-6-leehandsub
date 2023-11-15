@@ -13,12 +13,6 @@ class OrderInfo(private val orderMenu: ChristmasMenu, private val orderCount: In
         return orderMenu.menuKind == MenuKind.DRINK
     }
 
-//    fun increaseEventMenuOrderCount() {
-//        if (ChristmasMenu.getEventMenu().map { it[0] }.contains(orderMenu.menuName)) {
-//            orderCount++
-//        }
-//    }
-
     fun getOrderInfoTotalMoney(): Int {
         return orderMenu.price * orderCount
     }

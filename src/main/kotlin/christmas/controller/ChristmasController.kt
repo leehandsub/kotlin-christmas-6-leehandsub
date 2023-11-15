@@ -31,8 +31,13 @@ class ChristmasController {
         benefitInfos = BenefitInfos(orderDay, orderInfos)
         OutputView.printBenefitMessage()
         val benefitInfoDtos = benefitInfos.getBenefitDtos()
-        benefitInfoDtos.forEach {
-            OutputView.printBenefitInfo(it.benefitDes, it.benefitTotalPrice)
+
+        if (benefitInfoDtos.isEmpty()) {
+            OutputView.printNot()
+        } else {
+            benefitInfoDtos.forEach {
+                OutputView.printBenefitInfo(it.benefitDes, it.benefitTotalPrice)
+            }
         }
     }
 
@@ -62,7 +67,6 @@ class ChristmasController {
             OutputView.printNot()
         } else {
             orderInfos = OrderInfos(inputOrderMenu)
-            //orderInfos.setEventMenuOrderInfos()
             OutputView.printEventMenus(ChristmasMenu.getEventMenu().map { it[0] })
         }
     }
