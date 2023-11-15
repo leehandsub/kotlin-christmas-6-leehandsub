@@ -5,7 +5,6 @@ import christmas.model.BenefitInfos
 import christmas.model.ChristmasMenu
 import christmas.model.EventResult
 import christmas.model.OrderInfos
-import christmas.model.OrderInfos.Companion.ORDER_MENU_INDEX
 import christmas.view.InputView
 import christmas.view.OutputView
 
@@ -45,16 +44,15 @@ class ChristmasController {
     private fun startEventPlanner() {
         InputView.printGreeting()
         orderDay = repeatInputIncorrect { InputView.getInputDay() }
+
         val inputOrderMenu = InputView.getInputOrderMenu()
         orderInfos = OrderInfos(inputOrderMenu)
-        inputOrderMenu.addAll(ChristmasMenu.getEventMenu())
-
         OutputView.printOrderDay(orderDay)
         OutputView.printOrderInfoMessage()
-        arrangeOrder(inputOrderMenu)
+        arrangeOrder()
     }
 
-    private fun arrangeOrder(inputOrderMenu: MutableList<List<String>>) {
+    private fun arrangeOrder() {
         val orderInfoDtos = orderInfos.getOrderDtoInfo()
         orderInfoDtos.forEach {
             OutputView.printOrderInfo(it.orderMenu, it.orderCount)
@@ -66,8 +64,8 @@ class ChristmasController {
         if (totalMoney < MINIMUM_EVENT_PRICE) {
             OutputView.printNot()
         } else {
-            orderInfos = OrderInfos(inputOrderMenu)
-            OutputView.printEventMenus(ChristmasMenu.getEventMenu().map { it[ORDER_MENU_INDEX] })
+            orderInfos.calEventMenu()
+            OutputView.printEventMenus(ChristmasMenu.getEventMenu())
         }
     }
 

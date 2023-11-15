@@ -1,5 +1,8 @@
 package christmas.view
 
+import christmas.model.OrderInfos.Companion.ORDER_COUNT_INDEX
+import christmas.model.OrderInfos.Companion.ORDER_MENU_INDEX
+
 object OutputView {
     private const val ORDER_DAY_MESSAGE = "12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"
     private const val ORDER_MENU_MESSAGE = "\n<주문 메뉴>"
@@ -58,9 +61,9 @@ object OutputView {
         println(EVENT_MENU_MESSAGE)
     }
 
-    fun printEventMenus(eventMenus: List<String>) {
+    fun printEventMenus(eventMenus: List<List<String>>) {
         eventMenus.forEach {
-            println(ORDER_INFO_MESSAGE.format(it, 1))
+            println(ORDER_INFO_MESSAGE.format(it[ORDER_MENU_INDEX], it[ORDER_COUNT_INDEX]))
         }
     }
 

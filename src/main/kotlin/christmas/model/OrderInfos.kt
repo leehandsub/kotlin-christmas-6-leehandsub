@@ -1,10 +1,12 @@
 package christmas.model
 
+import christmas.model.ChristmasMenu.Companion.EVENT_AMOUNT
 import christmas.view.InputView.checkPositiveInteger
 import christmas.view.InputView.errorMessageFormat
 
 class OrderInfos(inputOrderInfo: List<List<String>>) {
     private val orderInfos: List<OrderInfo>
+    private var eventPrice = 0
     val orderInfosTotalMoney: Int
         get() {
             return orderInfos.fold(0) { total, orderInfo ->
@@ -26,6 +28,16 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
             errorMessageFormat(ERROR_ORDER_INFO_MESSAGE)
         }
         checkOrderCount(orderInfosCount)
+    }
+
+    fun calEventMenu() {
+        ChristmasMenu.entries.filter { it.isEventMenu }.map {
+            eventPrice += it.price * EVENT_AMOUNT.toInt()
+        }
+    }
+
+    fun getOrderInfosTotalMoneyAndEventPrice(): Int {
+        return orderInfosTotalMoney + eventPrice
     }
 
     private fun checkOrderCount(orderInfosCount: Int) {
@@ -78,11 +90,11 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
     }
 
     companion object {
-        private const val ORDER_COUNT_INDEX = 1
         private const val MAX_ORDER_MENU = 20
         private const val MIN_CHRISTMAS_DAY_EVENT_PRICE = 1000
-        const val ORDER_MENU_INDEX = 0
 
+        const val ORDER_MENU_INDEX = 0
+        const val ORDER_COUNT_INDEX = 1
         const val ERROR_ORDER_INFO_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요."
     }
 }
