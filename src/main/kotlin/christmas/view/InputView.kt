@@ -9,7 +9,6 @@ object InputView {
     private const val MENU_INPUT_ANNOUNCE_MESSAGE = "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)"
     private const val DELIMITER_COMMA = ","
     private const val DELIMITER_DASH = "-"
-    private const val ERROR_NUMBER_MESSAGE = "입력값이 숫자가 아닙니다."
     private const val ERROR_DAY_RANGE_MESSAGE = "유효하지 않은 날짜입니다. 다시 입력해 주세요."
 
     fun printGreeting() {
@@ -18,7 +17,7 @@ object InputView {
 
     fun getInputDay(): Int {
         println(CHRISTMAS_DAY_MESSAGE)
-        val inputDay = checkPositiveInteger(Console.readLine(), ERROR_NUMBER_MESSAGE)
+        val inputDay = checkPositiveInteger(Console.readLine(), ERROR_DAY_RANGE_MESSAGE)
         checkNumberRange(inputDay)
         return inputDay
     }

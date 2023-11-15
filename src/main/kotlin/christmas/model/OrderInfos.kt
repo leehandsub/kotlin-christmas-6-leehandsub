@@ -37,7 +37,7 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
     private fun isOnlyDrink(): Boolean {
         return orderInfos.any { !it.isDrink() }
     }
-    
+
     fun getOrderDtoInfo(): List<OrderInfoDto> {
         return orderInfos.filter { !it.isZeroCount() }.map { it.getOrderInfoDto() }
     }

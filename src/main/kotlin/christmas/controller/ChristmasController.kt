@@ -1,5 +1,6 @@
 package christmas.controller
 
+import christmas.controller.ErrorHandler.repeatInputIncorrect
 import christmas.model.BenefitInfos
 import christmas.model.ChristmasMenu
 import christmas.model.EventResult
@@ -14,7 +15,10 @@ class ChristmasController {
     private lateinit var benefitInfos: BenefitInfos
 
     fun playEventPlanner() {
-        startEventPlanner()
+        InputView.printGreeting()
+        orderDay = repeatInputIncorrect { InputView.getInputDay() }
+
+        repeatInputIncorrect { startEventPlanner() }
         calculateBenefit()
         eventResult()
     }
@@ -42,8 +46,7 @@ class ChristmasController {
     }
 
     private fun startEventPlanner() {
-        InputView.printGreeting()
-        orderDay = InputView.getInputDay()
+
 
         val inputOrderMenu = InputView.getInputOrderMenu()
         orderInfos = OrderInfos(inputOrderMenu)
