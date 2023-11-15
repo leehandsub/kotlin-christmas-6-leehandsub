@@ -1,5 +1,7 @@
 package christmas.model
 
+import christmas.view.InputView.checkPositiveInteger
+
 class OrderInfos(inputOrderInfo: List<List<String>>) {
     private val orderInfos: List<OrderInfo>
     val orderInfosTotalMoney: Int
@@ -12,7 +14,8 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
     init {
         orderInfos = inputOrderInfo.map {
             OrderInfo(
-                ChristmasMenu.getChristmasMenu(it[ORDER_MENU_INDEX]), it[ORDER_COUNT_INDEX].toInt()
+                ChristmasMenu.getChristmasMenu(it[ORDER_MENU_INDEX]),
+                checkPositiveInteger(it[ORDER_COUNT_INDEX], ERROR_ORDER_INFO_MESSAGE)
             )
         }
     }
@@ -65,5 +68,6 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
     companion object {
         private const val ORDER_MENU_INDEX = 0
         private const val ORDER_COUNT_INDEX = 1
+        const val ERROR_ORDER_INFO_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요."
     }
 }

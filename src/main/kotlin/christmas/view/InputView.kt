@@ -17,7 +17,7 @@ object InputView {
 
     fun getInputDay(): Int {
         println(CHRISTMAS_DAY_MESSAGE)
-        val inputDay = checkPositiveInteger(Console.readLine())
+        val inputDay = checkPositiveInteger(Console.readLine(),ERROR_NUMBER_MESSAGE)
         checkNumberRange(inputDay)
         return inputDay
     }
@@ -29,10 +29,10 @@ object InputView {
         }.toMutableList()
     }
 
-    private fun checkPositiveInteger(inputWinningNumber: String): Int {
+    fun checkPositiveInteger(inputWinningNumber: String,errorMessage: String): Int {
         val winningNumber = inputWinningNumber.toIntOrNull() ?: 0
         require(winningNumber > 0) {
-            errorMessageFormat(ERROR_NUMBER_MESSAGE)
+            errorMessageFormat(errorMessage)
         }
 
         return winningNumber

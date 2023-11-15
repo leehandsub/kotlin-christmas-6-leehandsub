@@ -1,5 +1,8 @@
 package christmas.model
 
+import christmas.model.OrderInfos.Companion.ERROR_ORDER_INFO_MESSAGE
+import christmas.view.InputView.errorMessageFormat
+
 enum class ChristmasMenu(val menuKind: MenuKind, val menuName: String, val price: Int, val isEventMenu: Boolean) {
 
     MUSHROOM_SOUP(MenuKind.APPETIZER, "양송이수프", 6000, false),
@@ -22,7 +25,9 @@ enum class ChristmasMenu(val menuKind: MenuKind, val menuName: String, val price
     companion object {
         fun getChristmasMenu(inputName: String): ChristmasMenu {
             val christmasMenu = entries.firstOrNull { it.menuName == inputName }
-            requireNotNull(christmasMenu)
+            requireNotNull(christmasMenu) {
+                errorMessageFormat(ERROR_ORDER_INFO_MESSAGE)
+            }
             return christmasMenu
         }
 
