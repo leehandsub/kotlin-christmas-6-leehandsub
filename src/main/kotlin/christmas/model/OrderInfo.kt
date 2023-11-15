@@ -1,8 +1,18 @@
 package christmas.model
 
-class OrderInfo(private val orderMenu: ChristmasMenu, private val orderCount: Int) {
+class OrderInfo(private val orderMenu: ChristmasMenu, private var orderCount: Int) {
     fun getOrderInfoDto(): OrderInfoDto {
         return OrderInfoDto(orderMenu.menuName, orderCount)
+    }
+
+    fun isZeroCount(): Boolean {
+        return orderCount == 0
+    }
+
+    fun increaseEventMenuOrderCount() {
+        if (ChristmasMenu.getEventMenu().map { it[0] }.contains(orderMenu.menuName)) {
+            orderCount++
+        }
     }
 
     fun getOrderInfoTotalMoney(): Int {

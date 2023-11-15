@@ -17,8 +17,14 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
         }
     }
 
+    fun setEventMenuOrderInfos() {
+        orderInfos.forEach {
+            it.increaseEventMenuOrderCount()
+        }
+    }
+
     fun getOrderDtoInfo(): List<OrderInfoDto> {
-        return orderInfos.map { it.getOrderInfoDto() }
+        return orderInfos.filter { !it.isZeroCount() }.map { it.getOrderInfoDto() }
     }
 
     fun getBenefitInfos(orderDay: Int): List<BenefitInfo> {

@@ -1,6 +1,7 @@
 package christmas.controller
 
 import christmas.model.BenefitInfos
+import christmas.model.ChristmasMenu
 import christmas.model.EventResult
 import christmas.model.OrderInfos
 import christmas.view.InputView
@@ -20,14 +21,13 @@ class ChristmasController {
 
     private fun eventResult() {
         OutputView.printBenefitTotalPriceMessage()
-        OutputView.printPrice(-benefitInfos.benefitTotalMoney)
+        OutputView.printBenfitPrice(-benefitInfos.benefitTotalMoney)
         val eventResult = EventResult(orderInfos, benefitInfos)
         OutputView.printTotalMoneyAfterDisCount(eventResult.getTotalMoneyAfterDiscount())
         OutputView.printEventBadge(eventResult.getBadge().badgeName)
     }
 
     private fun calculateBenefit() {
-
         benefitInfos = BenefitInfos(orderDay, orderInfos)
         OutputView.printBenefitMessage()
         val benefitInfoDtos = benefitInfos.getBenefitDtos()
@@ -39,7 +39,11 @@ class ChristmasController {
     private fun startEventPlanner() {
         InputView.printGreeting()
         orderDay = InputView.getInputDay()
-        orderInfos = OrderInfos(InputView.getInputOrderMenu())
+
+        val inputOrderMenu = InputView.getInputOrderMenu()
+        inputOrderMenu.addAll(ChristmasMenu.getEventMenu())
+        orderInfos = OrderInfos(inputOrderMenu)
+
         OutputView.printOrderDay(orderDay)
         OutputView.printOrderInfoMessage()
         arrangeOrder()
@@ -52,12 +56,13 @@ class ChristmasController {
         }
         val totalMoney = orderInfos.orderInfosTotalMoney
         OutputView.printTotalOrderInfoMoney()
-        OutputView.printPrice(totalMoney)
+        OutputView.printBenfitPrice(totalMoney)
         OutputView.printEventMenuMessage()
         if (totalMoney < 120000) {
             OutputView.printNot()
         } else {
-            OutputView.printChampagne()
+            orderInfos.setEventMenuOrderInfos()
+            OutputView.printEventMenus(ChristmasMenu.getEventMenu().map { it[0] })
         }
     }
 

@@ -20,10 +20,10 @@ object InputView {
         return inputDay.toInt()
     }
 
-    fun getInputOrderMenu(): List<List<String>> {
+    fun getInputOrderMenu(): MutableList<List<String>> {
         println(MENU_INPUT_ANNOUNCE_MESSAGE)
         return Console.readLine().split(DELIMITER_COMMA).map {
             it.split(DELIMITER_DASH)
-        }
+        }.toMutableList()
     }
 }

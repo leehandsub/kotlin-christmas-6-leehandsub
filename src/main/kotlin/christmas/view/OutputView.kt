@@ -47,7 +47,7 @@ object OutputView {
         println(BENEFIT_TOTAL_PRICE_MESSAGE)
     }
 
-    fun printPrice(price: Int) {
+    fun printBenfitPrice(price: Int) {
         println(PRICE_MESSAGE.format(price.addCommas()))
     }
 
@@ -59,13 +59,15 @@ object OutputView {
         println(EVENT_MENU_MESSAGE)
     }
 
-    fun printChampagne() {
-        println(CHAMPAGNE)
+    fun printEventMenus(eventMenus: List<String>) {
+        eventMenus.forEach {
+            println(ORDER_INFO_MESSAGE.format(it, 1))
+        }
     }
 
     fun printTotalMoneyAfterDisCount(totalMoneyAfterDiscount: Int) {
         println(TOTAL_MONEY_AFTER_DISCOUNT)
-        printPrice(totalMoneyAfterDiscount)
+        printBenfitPrice(totalMoneyAfterDiscount)
     }
 
     fun printEventBadge(badgeName: String) {
