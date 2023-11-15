@@ -26,5 +26,4 @@ class OrderInfosTest {
             OrderInfos(listOf(listOf("초코케이크", "21")))
         }
     }
-
 }
