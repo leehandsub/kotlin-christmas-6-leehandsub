@@ -36,6 +36,10 @@ enum class ChristmasMenu(val menuKind: MenuKind, val menuName: String, val price
             return entries.filter { it.isEventMenu }.map { listOf(it.menuName, EVENT_AMOUNT) }
         }
 
+        fun getTotalEventPrice(): Int {
+            return entries.filter { it.isEventMenu }.sumOf { it.price * EVENT_AMOUNT.toInt() }
+        }
+
     }
 
 }

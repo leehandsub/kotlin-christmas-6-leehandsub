@@ -1,6 +1,5 @@
 package christmas.model
 
-import christmas.model.ChristmasMenu.Companion.EVENT_AMOUNT
 import christmas.view.InputView.checkPositiveInteger
 import christmas.view.InputView.errorMessageFormat
 
@@ -31,9 +30,7 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
     }
 
     fun calEventMenu() {
-        ChristmasMenu.entries.filter { it.isEventMenu }.map {
-            eventPrice += it.price * EVENT_AMOUNT.toInt()
-        }
+        eventPrice = Benefit.GIFT_EVENT.benefitPrice
     }
 
     fun getOrderInfosTotalMoneyAndEventPrice(): Int {
