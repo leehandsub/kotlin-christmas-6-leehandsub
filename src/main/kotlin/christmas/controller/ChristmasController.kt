@@ -70,7 +70,7 @@ class ChristmasController {
     }
 
     companion object {
-        private const val MINIMUM_EVENT_PRICE = 120000
+        const val MINIMUM_EVENT_PRICE = 120000
     }
 
 }

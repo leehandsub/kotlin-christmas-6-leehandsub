@@ -1,5 +1,6 @@
 package christmas.model
 
+import christmas.controller.ChristmasController.Companion.MINIMUM_EVENT_PRICE
 import christmas.view.InputView.checkPositiveInteger
 import christmas.view.InputView.errorMessageFormat
 
@@ -53,7 +54,9 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
 
     fun getBenefitInfos(orderDay: Int): List<BenefitInfo> {
         val benefits = Benefit.getBenefits(orderDay)
-        return benefits.map {
+        return benefits.filter {
+            getBenefitInfo(it, orderDay) != 0
+        }.map {
             BenefitInfo(it, getBenefitInfo(it, orderDay))
         }
     }
@@ -65,7 +68,10 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
             }
 
             Benefit.GIFT_EVENT -> {
-                return benefit.benefitPrice
+                if (orderInfosTotalMoney >= MINIMUM_EVENT_PRICE) {
+                    return benefit.benefitPrice
+                }
+                return 0
             }
 
             Benefit.SPECIAL_DISCOUNT -> {
