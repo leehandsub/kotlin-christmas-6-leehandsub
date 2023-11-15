@@ -41,15 +41,15 @@ class ChristmasController {
         orderDay = InputView.getInputDay()
 
         val inputOrderMenu = InputView.getInputOrderMenu()
-        inputOrderMenu.addAll(ChristmasMenu.getEventMenu())
         orderInfos = OrderInfos(inputOrderMenu)
+        inputOrderMenu.addAll(ChristmasMenu.getEventMenu())
 
         OutputView.printOrderDay(orderDay)
         OutputView.printOrderInfoMessage()
-        arrangeOrder()
+        arrangeOrder(inputOrderMenu)
     }
 
-    private fun arrangeOrder() {
+    private fun arrangeOrder(inputOrderMenu: MutableList<List<String>>) {
         val orderInfoDtos = orderInfos.getOrderDtoInfo()
         orderInfoDtos.forEach {
             OutputView.printOrderInfo(it.orderMenu, it.orderCount)
@@ -61,7 +61,8 @@ class ChristmasController {
         if (totalMoney < 120000) {
             OutputView.printNot()
         } else {
-            orderInfos.setEventMenuOrderInfos()
+            orderInfos = OrderInfos(inputOrderMenu)
+            //orderInfos.setEventMenuOrderInfos()
             OutputView.printEventMenus(ChristmasMenu.getEventMenu().map { it[0] })
         }
     }

@@ -32,7 +32,7 @@ enum class ChristmasMenu(val menuKind: MenuKind, val menuName: String, val price
         }
 
         fun getEventMenu(): List<List<String>> {
-            return entries.filter { it.isEventMenu }.map { listOf(it.menuName, "0") }
+            return entries.filter { it.isEventMenu }.map { listOf(it.menuName, "1") }
         }
 
     }

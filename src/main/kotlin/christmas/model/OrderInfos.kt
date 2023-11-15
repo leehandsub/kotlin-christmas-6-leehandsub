@@ -38,11 +38,11 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
         return orderInfos.any { !it.isDrink() }
     }
 
-    fun setEventMenuOrderInfos() {
-        orderInfos.forEach {
-            it.increaseEventMenuOrderCount()
-        }
-    }
+//    fun setEventMenuOrderInfos() {
+//        orderInfos.forEach {
+//            it.increaseEventMenuOrderCount()
+//        }
+//    }
 
     fun getOrderDtoInfo(): List<OrderInfoDto> {
         return orderInfos.filter { !it.isZeroCount() }.map { it.getOrderInfoDto() }
