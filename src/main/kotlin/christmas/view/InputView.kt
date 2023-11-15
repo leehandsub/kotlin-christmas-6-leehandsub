@@ -1,6 +1,7 @@
 package christmas.view
 
 import camp.nextstep.edu.missionutils.Console
+import christmas.model.OrderInfos.Companion.ERROR_ORDER_INFO_MESSAGE
 
 object InputView {
     private const val GREETING_MESSAGE = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."
@@ -17,19 +18,29 @@ object InputView {
 
     fun getInputDay(): Int {
         println(CHRISTMAS_DAY_MESSAGE)
-        val inputDay = checkPositiveInteger(Console.readLine(),ERROR_NUMBER_MESSAGE)
+        val inputDay = checkPositiveInteger(Console.readLine(), ERROR_NUMBER_MESSAGE)
         checkNumberRange(inputDay)
         return inputDay
     }
 
     fun getInputOrderMenu(): MutableList<List<String>> {
         println(MENU_INPUT_ANNOUNCE_MESSAGE)
-        return Console.readLine().split(DELIMITER_COMMA).map {
+
+        val inputOrderMenu = Console.readLine().split(DELIMITER_COMMA).map {
             it.split(DELIMITER_DASH)
         }.toMutableList()
+
+        checkDuplicateMenu(inputOrderMenu.map { it[0] })
+        return inputOrderMenu
     }
 
-    fun checkPositiveInteger(inputWinningNumber: String,errorMessage: String): Int {
+    private fun checkDuplicateMenu(menuNames: List<String>) {
+        require(menuNames.distinct().size == menuNames.size) {
+            errorMessageFormat(ERROR_ORDER_INFO_MESSAGE)
+        }
+    }
+
+    fun checkPositiveInteger(inputWinningNumber: String, errorMessage: String): Int {
         val winningNumber = inputWinningNumber.toIntOrNull() ?: 0
         require(winningNumber > 0) {
             errorMessageFormat(errorMessage)
@@ -37,6 +48,7 @@ object InputView {
 
         return winningNumber
     }
+
     private fun checkNumberRange(inputDay: Int) {
         check(inputDay <= 31) {
             errorMessageFormat(ERROR_DAY_RANGE_MESSAGE)
