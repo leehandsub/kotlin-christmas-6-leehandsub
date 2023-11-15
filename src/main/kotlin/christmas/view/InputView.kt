@@ -30,6 +30,9 @@ object InputView {
         val inputOrderMenu = Console.readLine().split(DELIMITER_COMMA).map {
             it.split(DELIMITER_DASH)
         }.toMutableList()
+        inputOrderMenu.forEach {
+            checkInputType(it)
+        }
 
         checkDuplicateMenu(inputOrderMenu.map { it[ORDER_MENU_INDEX] })
         return inputOrderMenu
@@ -37,6 +40,12 @@ object InputView {
 
     private fun checkDuplicateMenu(menuNames: List<String>) {
         require(menuNames.distinct().size == menuNames.size) {
+            errorMessageFormat(ERROR_ORDER_INFO_MESSAGE)
+        }
+    }
+
+    private fun checkInputType(menuNames: List<String>) {
+        require(menuNames.size == 2) {
             errorMessageFormat(ERROR_ORDER_INFO_MESSAGE)
         }
     }

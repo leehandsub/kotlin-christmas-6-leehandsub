@@ -14,7 +14,7 @@ class ChristmasController {
     private lateinit var benefitInfos: BenefitInfos
 
     fun playEventPlanner() {
-        repeatInputIncorrect { startEventPlanner() }
+        startEventPlanner()
         calculateBenefit()
         eventResult()
     }
@@ -44,7 +44,10 @@ class ChristmasController {
     private fun startEventPlanner() {
         InputView.printGreeting()
         orderDay = repeatInputIncorrect { InputView.getInputDay() }
+        repeatInputIncorrect { getInputOrderInfo() }
+    }
 
+    private fun getInputOrderInfo() {
         val inputOrderMenu = InputView.getInputOrderMenu()
         orderInfos = OrderInfos(inputOrderMenu)
         OutputView.printOrderDay(orderDay)
