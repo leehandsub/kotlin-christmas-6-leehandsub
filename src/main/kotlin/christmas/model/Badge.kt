@@ -9,10 +9,10 @@ enum class Badge(val badgeName: String, val badgePrice: Int) {
     companion object {
         fun getBadge(price: Int): Badge {
             return when {
-                NOTTING.badgePrice >= price -> NOTTING
-                STAR.badgePrice >= price -> STAR
-                TREE.badgePrice >= price -> TREE
-                else -> SANTA
+                price >= SANTA.badgePrice -> SANTA
+                price >= TREE.badgePrice -> TREE
+                price >= STAR.badgePrice -> STAR
+                else -> NOTTING
             }
         }
     }
