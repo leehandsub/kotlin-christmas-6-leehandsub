@@ -11,7 +11,11 @@ class BenefitInfos(orderDay: Int, orderInfos: OrderInfos) {
         }
 
     init {
-        benefitInfos = orderInfos.getBenefitInfos(orderDay)
+        benefitInfos = if (orderInfos.orderInfosTotalMoney >= 10000) {
+            orderInfos.getBenefitInfos(orderDay)
+        } else {
+            listOf()
+        }
     }
 
     fun getBenefitDtos(): List<BenefitInfoDto> {
