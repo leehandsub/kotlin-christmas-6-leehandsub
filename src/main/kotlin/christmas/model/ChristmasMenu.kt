@@ -23,7 +23,7 @@ enum class ChristmasMenu(val menuKind: MenuKind, val menuName: String, val price
     CHAMPAGNE(MenuKind.DRINK, "샴페인", 25000, true);
 
     companion object {
-        const val EVENT_AMOUNT = "1"
+        private const val EVENT_AMOUNT = "1"
         fun getChristmasMenu(inputName: String): ChristmasMenu {
             val christmasMenu = entries.firstOrNull { it.menuName == inputName }
             requireNotNull(christmasMenu) {
