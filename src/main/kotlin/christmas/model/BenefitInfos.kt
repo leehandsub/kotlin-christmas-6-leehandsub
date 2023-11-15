@@ -11,7 +11,7 @@ class BenefitInfos(orderDay: Int, orderInfos: OrderInfos) {
         }
 
     init {
-        benefitInfos = if (orderInfos.orderInfosTotalMoney >= 10000) {
+        benefitInfos = if (orderInfos.orderInfosTotalMoney >= MINIMUM_DISCOUNT_PRICE) {
             orderInfos.getBenefitInfos(orderDay)
         } else {
             listOf()
@@ -24,5 +24,7 @@ class BenefitInfos(orderDay: Int, orderInfos: OrderInfos) {
         }
     }
 
-
+    companion object {
+        private const val MINIMUM_DISCOUNT_PRICE = 10000
+    }
 }

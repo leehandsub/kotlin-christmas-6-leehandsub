@@ -5,19 +5,16 @@ import christmas.model.BenefitInfos
 import christmas.model.ChristmasMenu
 import christmas.model.EventResult
 import christmas.model.OrderInfos
+import christmas.model.OrderInfos.Companion.ORDER_MENU_INDEX
 import christmas.view.InputView
 import christmas.view.OutputView
 
 class ChristmasController {
-
     private lateinit var orderInfos: OrderInfos
     private var orderDay: Int = 0
     private lateinit var benefitInfos: BenefitInfos
 
     fun playEventPlanner() {
-        InputView.printGreeting()
-        orderDay = repeatInputIncorrect { InputView.getInputDay() }
-
         repeatInputIncorrect { startEventPlanner() }
         calculateBenefit()
         eventResult()
@@ -25,7 +22,7 @@ class ChristmasController {
 
     private fun eventResult() {
         OutputView.printBenefitTotalPriceMessage()
-        OutputView.printBenfitPrice(-benefitInfos.benefitTotalMoney)
+        OutputView.printBenefitPrice(-benefitInfos.benefitTotalMoney)
         val eventResult = EventResult(orderInfos, benefitInfos)
         OutputView.printTotalMoneyAfterDisCount(eventResult.getTotalMoneyAfterDiscount())
         OutputView.printEventBadge(eventResult.getBadge().badgeName)
@@ -46,8 +43,8 @@ class ChristmasController {
     }
 
     private fun startEventPlanner() {
-
-
+        InputView.printGreeting()
+        orderDay = repeatInputIncorrect { InputView.getInputDay() }
         val inputOrderMenu = InputView.getInputOrderMenu()
         orderInfos = OrderInfos(inputOrderMenu)
         inputOrderMenu.addAll(ChristmasMenu.getEventMenu())
@@ -64,14 +61,18 @@ class ChristmasController {
         }
         val totalMoney = orderInfos.orderInfosTotalMoney
         OutputView.printTotalOrderInfoMoney()
-        OutputView.printBenfitPrice(totalMoney)
+        OutputView.printBenefitPrice(totalMoney)
         OutputView.printEventMenuMessage()
-        if (totalMoney < 120000) {
+        if (totalMoney < MINIMUM_EVENT_PRICE) {
             OutputView.printNot()
         } else {
             orderInfos = OrderInfos(inputOrderMenu)
-            OutputView.printEventMenus(ChristmasMenu.getEventMenu().map { it[0] })
+            OutputView.printEventMenus(ChristmasMenu.getEventMenu().map { it[ORDER_MENU_INDEX] })
         }
+    }
+
+    companion object {
+        private const val MINIMUM_EVENT_PRICE = 120000
     }
 
 }

@@ -29,7 +29,7 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
     }
 
     private fun checkOrderCount(orderInfosCount: Int) {
-        require(orderInfosCount <= 20) {
+        require(orderInfosCount <= MAX_ORDER_MENU) {
             errorMessageFormat(ERROR_ORDER_INFO_MESSAGE)
         }
     }
@@ -52,7 +52,7 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
     private fun getBenefitInfo(benefit: Benefit, orderDay: Int): Int {
         when (benefit) {
             Benefit.CHRISTMAS_DAY_DISCOUNTS -> {
-                return 1000 + benefit.benefitPrice * (orderDay - 1)
+                return MIN_CHRISTMAS_DAY_EVENT_PRICE + benefit.benefitPrice * (orderDay - 1)
             }
 
             Benefit.GIFT_EVENT -> {
@@ -78,8 +78,11 @@ class OrderInfos(inputOrderInfo: List<List<String>>) {
     }
 
     companion object {
-        private const val ORDER_MENU_INDEX = 0
         private const val ORDER_COUNT_INDEX = 1
+        private const val MAX_ORDER_MENU = 20
+        private const val MIN_CHRISTMAS_DAY_EVENT_PRICE = 1000
+        const val ORDER_MENU_INDEX = 0
+
         const val ERROR_ORDER_INFO_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요."
     }
 }

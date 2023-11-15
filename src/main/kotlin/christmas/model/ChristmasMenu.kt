@@ -23,6 +23,7 @@ enum class ChristmasMenu(val menuKind: MenuKind, val menuName: String, val price
     CHAMPAGNE(MenuKind.DRINK, "샴페인", 25000, true);
 
     companion object {
+        private const val EVENT_AMOUNT = "1"
         fun getChristmasMenu(inputName: String): ChristmasMenu {
             val christmasMenu = entries.firstOrNull { it.menuName == inputName }
             requireNotNull(christmasMenu) {
@@ -32,7 +33,7 @@ enum class ChristmasMenu(val menuKind: MenuKind, val menuName: String, val price
         }
 
         fun getEventMenu(): List<List<String>> {
-            return entries.filter { it.isEventMenu }.map { listOf(it.menuName, "1") }
+            return entries.filter { it.isEventMenu }.map { listOf(it.menuName, EVENT_AMOUNT) }
         }
 
     }
