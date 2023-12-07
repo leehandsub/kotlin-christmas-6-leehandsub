@@ -1,5 +1,5 @@
 package christmas.model
 
 enum class MenuKind {
-    APPETIZER,MAINFOOD,DESSERT,DRINK
+    APPETIZER, MAINFOOD, DESSERT, DRINK
 }

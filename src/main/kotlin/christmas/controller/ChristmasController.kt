@@ -15,19 +15,21 @@ class ChristmasController {
 
     fun playEventPlanner() {
         startEventPlanner()
-        calculateBenefit()
+        benefitResult()
         eventResult()
     }
 
     private fun eventResult() {
         OutputView.printBenefitTotalPriceMessage()
         OutputView.printBenefitPrice(-benefitInfos.benefitTotalMoney)
+
         val eventResult = EventResult(orderInfos, benefitInfos)
         OutputView.printTotalMoneyAfterDisCount(eventResult.getTotalMoneyAfterDiscount())
+
         OutputView.printEventBadge(eventResult.getBadge().badgeName)
     }
 
-    private fun calculateBenefit() {
+    private fun benefitResult() {
         benefitInfos = BenefitInfos(orderDay, orderInfos)
         OutputView.printBenefitMessage()
         val benefitInfoDtos = benefitInfos.getBenefitDtos()
@@ -49,9 +51,11 @@ class ChristmasController {
 
     private fun getInputOrderInfo() {
         val inputOrderMenu = InputView.getInputOrderMenu()
+
         orderInfos = OrderInfos(inputOrderMenu)
         OutputView.printOrderDay(orderDay)
         OutputView.printOrderInfoMessage()
+        
         arrangeOrder()
     }
 
@@ -60,10 +64,12 @@ class ChristmasController {
         orderInfoDtos.forEach {
             OutputView.printOrderInfo(it.orderMenu, it.orderCount)
         }
+
         val totalMoney = orderInfos.orderInfosTotalMoney
         OutputView.printTotalOrderInfoMoney()
         OutputView.printBenefitPrice(totalMoney)
         OutputView.printEventMenuMessage()
+
         if (totalMoney < MINIMUM_EVENT_PRICE) {
             OutputView.printNot()
         } else {
